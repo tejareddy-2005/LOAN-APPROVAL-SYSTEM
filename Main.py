@@ -77,7 +77,7 @@ print("CNN (RandomForest) Results")
 print("==============================")
 evaluate(y_test, y_pred_cnn, "CNN (RF)")
 
-y_pred_cnn = (model.predict(X_test)
+y_pred_cnn = (model.predict(X_test))
 
 print("\n==============================")
 print("1D-CNN Results")
