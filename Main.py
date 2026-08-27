@@ -63,14 +63,21 @@ evaluate(y_test, y_pred_xgb, "XGBoost")
 # ---------------------------
 # 3. CNN Model
 # ---------------------------
-X_train_cnn = X_train.values.reshape(X_train.shape[0], X_train.shape[1], 1)
-X_test_cnn = X_test.values.reshape(X_test.shape[0], X_test.shape[1], 1)
-
-model = build_model((X_train.shape[1], 1))
+# ------------------------
+# 3. CNN Model - Now using RandomForest (Simple)
+# ------------------------
+model = build_model()
 
 model.fit(X_train, y_train)
 
-y_pred_cnn = (model.predict(X_test_cnn) > 0.5).astype(int)
+y_pred_cnn = model.predict(X_test)
+
+print("\n==============================")
+print("CNN (RandomForest) Results")
+print("==============================")
+evaluate(y_test, y_pred_cnn, "CNN (RF)")
+
+y_pred_cnn = (model.predict(X_test)
 
 print("\n==============================")
 print("1D-CNN Results")
