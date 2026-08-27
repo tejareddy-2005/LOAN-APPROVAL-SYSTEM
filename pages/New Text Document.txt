@@ -1,0 +1,60 @@
+import streamlit as st
+import pandas as pd
+from database import add_user, get_history
+
+def show_admin_dashboard():
+    st.title("👨‍💼 Admin Dashboard")
+
+    menu = st.sidebar.selectbox(
+        "Menu",
+        ["Upload Dataset", "Train Model", "Add Employee", "View History"]
+    )
+
+    # ---------------------------
+    # Upload Dataset
+    # ---------------------------
+    if menu == "Upload Dataset":
+        st.subheader("Upload Dataset")
+
+        file = st.file_uploader("Upload CSV", type=["csv"])
+
+        if file:
+            df = pd.read_csv(file)
+            df.to_csv("uploaded_dataset.csv", index=False)
+            st.success("Dataset uploaded successfully")
+            st.dataframe(df.head())
+
+    # ---------------------------
+    # Train Model
+    # ---------------------------
+    elif menu == "Train Model":
+        st.subheader("Train Model")
+
+        if st.button("Train"):
+            import os
+            if os.path.exists("uploaded_dataset.csv"):
+                st.success("Model trained successfully (connect main.py later)")
+            else:
+                st.error("Upload dataset first")
+
+    # ---------------------------
+    # Add Employee
+    # ---------------------------
+    elif menu == "Add Employee":
+        st.subheader("Add Employee")
+
+        username = st.text_input("Username")
+        password = st.text_input("Password", type="password")
+
+        if st.button("Add"):
+            add_user(username, password, "employee")
+            st.success("Employee added successfully")
+
+    # ---------------------------
+    # View History
+    # ---------------------------
+    elif menu == "View History":
+        st.subheader("Prediction History")
+
+        df = get_history()
+        st.dataframe(df)
