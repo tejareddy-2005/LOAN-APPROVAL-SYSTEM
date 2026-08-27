@@ -68,7 +68,7 @@ X_test_cnn = X_test.values.reshape(X_test.shape[0], X_test.shape[1], 1)
 
 model = build_model((X_train.shape[1], 1))
 
-model.fit(X_train_cnn, y_train, epochs=10, batch_size=32)
+model.fit(X_train, y_train)
 
 y_pred_cnn = (model.predict(X_test_cnn) > 0.5).astype(int)
 
