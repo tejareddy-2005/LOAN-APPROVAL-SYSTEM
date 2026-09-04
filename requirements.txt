@@ -1,4 +1,7 @@
 streamlit
 pandas
+joblib
+shap
+matplotlib
 scikit-learn
-xgboost
+mysql-connector-python
